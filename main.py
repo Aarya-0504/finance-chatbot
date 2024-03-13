@@ -38,10 +38,10 @@ def calculate_MACD(ticker):
     return f'{MACD[-1]},{signal[-1]},{MACD_histogram[-1]}'
 
 def plot_stock_price(ticker):
-    data=yf.Ticker(ticker).history(period='1y').Close()
+    data=yf.Ticker(ticker).history(period='1y')
     plt.figure(figsize=(10,5))
     plt.plot(data.index,data.Close)
-    plt.title('{ticker} Stock price over Last Year')
+    plt.title(f'{ticker} Stock price over Last Year')
     plt.xlabel('Date')
     plt.ylabel('Stock Price in $')
     plt.grid(True)
@@ -183,7 +183,7 @@ if user_input:
                 args_dict={'ticker':function_args.get('ticker'), 'window':function_args.get('window')}
 
             function_to_call = available_functions[function_name]
-            function_response=function_to_call(args_dict)  # Pass args_dict using **
+            function_response=function_to_call(**args_dict)  # Pass args_dict using **
 
             if function_name == 'plot_stock_price':
                 st.image('stock.png')
